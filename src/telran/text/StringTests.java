@@ -39,7 +39,6 @@ class StringTests {
 
 	private String joinStrings(String[] strings, String delimeter) {
 		String res = "";
-//		String res = new String("");
 		if (strings != null && strings.length > 0) {
 			res = strings[0];
 			for (int i = 1; i < strings.length; i++) {
