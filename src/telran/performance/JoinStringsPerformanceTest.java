@@ -11,7 +11,7 @@ String joinStrings;
 
 	@Override
 	protected void runTest() {
-		JoinStrings joinStrings = (strings,delimeter) -> {
+		JoinStrings join = (strings,delimeter) -> {
 			//TODO
 			return "";
 		};
