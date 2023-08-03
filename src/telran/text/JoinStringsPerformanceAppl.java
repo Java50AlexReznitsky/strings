@@ -6,8 +6,8 @@ import java.util.Map;
 import telran.performance.JoinStringsPerformanceTest;
 
 public class JoinStringsPerformanceAppl {
-	static final int RUNS_COUNT = 10000;
-	static final int STRINGS_COUNT = 1_000;
+	static final int RUNS_COUNT = 1000;
+	static final int STRINGS_COUNT = 1000;
 	static final String[] strings;
 
 	static {
