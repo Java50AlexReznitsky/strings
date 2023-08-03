@@ -1,8 +1,9 @@
 package telran.text;
 
-public class JoinStringsOnStandard {
- 
- String joinStringsOnStandard(String[] strings, String delimeter) {
+public class JoinStringsOnStandard implements JoinStrings {
+	
+	public String join(String[] strings, String delimeter) {
+		
 		return String.join(delimeter, strings);
 	}
 }

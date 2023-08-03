@@ -1,8 +1,9 @@
 package telran.text;
 
-public class JoinStringsOnString {
+public class JoinStringsOnString implements JoinStrings{
 
-	String joinStringsOnString(String[] strings, String delimeter) {
+	@Override
+	public String join(String[] strings, String delimeter) {
 		String res = "";
 		if (strings != null && strings.length > 0) {
 			res = strings[0];
@@ -12,4 +13,7 @@ public class JoinStringsOnString {
 		}
 		return res;
 	}
+	
+
+	
 }

@@ -54,8 +54,8 @@ class StringTests {
 			StringBuilder builder = new StringBuilder(strings[0]);
 			for (int i = 1; i < strings.length; i++) {
 				builder.append(delimeter).append(strings[i]);
-				res = builder.toString();
 			}
+			res = builder.toString();
 		}
 		return res;
 	}
