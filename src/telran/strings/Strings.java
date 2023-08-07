@@ -20,17 +20,33 @@ public class Strings {
 		return String.format("%1$s(\\.%1$s){3}", octet);
 	}
 
-	static public String arithmeticExpression() {
-		String operand = operand();
-		String operator = operator();
-		return String.format("%1$s %2$s %3$s", operand, operator, operand);
+	private static String operand() {
+		return "\\d+[.]?\\d*|[.]\\d+|[a-zA-Z$][\\w$]*|_[\\w$]+";
 	}
 
 	private static String operator() {
-		return "[ ]?[-+*/]+[ ]?";
+		return "[-+/*]";
 	}
 
-	private static String operand() {
-		return String.format("%1$s|[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)", javaVariable());
+//	static public String arithmeticExpression() {
+//		String operand = operand();
+//		String operator = operator();
+//		var expr2 = String.format("\\s*(%s)\\s*((%s)\\s*(%1$s)\\s*)*", operand, operator);
+//		System.out.println(expr2);
+//		return expr2;
+//	}
+
+	// Daniel readable solution:
+
+
+	public static String arithmeticExpression() {
+		String operator = addSpaces(operator());
+		String operand = addSpaces("(" + operand() + ")");
+		String expr = operand + "(" + operator + operand + ")*";
+		System.out.println(expr);
+		return expr;
+	}
+	private static String addSpaces(String token) {
+		return "\\s*" + token + "\\s*";
 	}
 }
