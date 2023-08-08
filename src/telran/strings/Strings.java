@@ -20,33 +20,53 @@ public class Strings {
 		return String.format("%1$s(\\.%1$s){3}", octet);
 	}
 
-	private static String operand() {
-		return "\\d+[.]?\\d*|[.]\\d+|[a-zA-Z$][\\w$]*|_[\\w$]+";
-	}
-
-	private static String operator() {
-		return "[-+/*]";
-	}
-
-//	static public String arithmeticExpression() {
-//		String operand = operand();
-//		String operator = operator();
-//		var expr2 = String.format("\\s*(%s)\\s*((%s)\\s*(%1$s)\\s*)*", operand, operator);
-//		System.out.println(expr2);
-//		return expr2;
-//	}
-
-	// Daniel readable solution:
-
-
 	public static String arithmeticExpression() {
-		String operator = addSpaces(operator());
-		String operand = addSpaces("(" + operand() + ")");
-		String expr = operand + "(" + operator + operand + ")*";
-		System.out.println(expr);
-		return expr;
+		String operandRE = operand();
+		String operatorRE = operator();
+		return String.format("%1$s(%2$s%1$s)*", operandRE, operatorRE);
 	}
-	private static String addSpaces(String token) {
-		return "\\s*" + token + "\\s*";
+
+	public static String operator() {
+		return "([-+*/])";
+	}
+
+	private static String operand() {
+		String numberExp = numberExp();
+		String variableExp = javaVariable();
+		return String.format("(\\s*\\(*\\s*)*((%s|%s))(\\s*\\)*\\s*)*", numberExp, variableExp);
+	}
+
+	private static String numberExp() {
+		return "(\\d+\\.?\\d*|\\.\\d+)";
+	}
+
+	public static boolean isArithmeticExpression(String expression) {
+		boolean res = false;
+		if (bracketsPairsValidation(expression)) {
+			res = expression.matches(arithmeticExpression());
+		}
+		return res;
+	}
+
+	private static boolean bracketsPairsValidation(String expression) {
+		boolean res = true;
+		int count = 0;
+		char[] chars = expression.toCharArray();
+		int index = 0;
+		while (index < chars.length && res) {
+			if (chars[index] == '(') {
+				count++;
+			} else if (chars[index] == ')') {
+				count--;
+				if (count < 0) {
+					res = false;
+				}
+			}
+			index++;
+		}
+		if (res) {
+			res = count == 0;
+		}
+		return res;
 	}
 }
